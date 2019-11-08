@@ -17,7 +17,9 @@ fetch(url, { headers: { "user-key": apiKey } })
         cost: el.restaurant.average_cost_for_two,
         rating: el.restaurant.user_rating.aggregate_rating,
         image: el.restaurant.featured_image,
-        address: el.restaurant.location.address
+        address: el.restaurant.location.address,
+        delivery: el.restaurant.has_online_delivery,
+        booking: el.restaurant.has_table_booking 
       })
     })
     printRestaurants()
@@ -41,7 +43,18 @@ document.getElementById("rateUp").addEventListener("click", () => {
 document.getElementById("rateDown").addEventListener("click", () => {
   sortDown("rating")
 })
+document.getElementById("delivery").addEventListener("click", () => {
+  filterOptions("delivery")
+})
+document.getElementById("bookOnline").addEventListener("click", () => {
+  filterOptions("booking")
+})
 
+const filterOptions = (option) => {
+  printRestaurants( restaurants.filter( el => {
+    return el[option] === 1
+  }))
+}
 
 const sortUp = (key) => {
   restaurants.sort((a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0))
