@@ -9,36 +9,7 @@ const restaurants = []
 
 const container = document.querySelector('.container')
 
-// Adding event listeners to buttons
-document.getElementById("priceUp").addEventListener("click", () => {
-  sortUp("cost")
-})
-document.getElementById("priceDown").addEventListener("click", () => {
-  sortDown("cost")
-})
-document.getElementById("nameUp").addEventListener("click", () => {
-  sortUp("name")
-})
-document.getElementById("nameDown").addEventListener("click", () => {
-  sortDown("name")
-})
-document.getElementById("rateUp").addEventListener("click", () => {
-  sortUp("rating")
-})
-document.getElementById("rateDown").addEventListener("click", () => {
-  sortDown("rating")
-})
-document.getElementById("delivery").addEventListener("click", () => {
-  filterOptions("delivery")
-})
-document.getElementById("bookOnline").addEventListener("click", () => {
-  filterOptions("booking")
-})
-document.getElementById("clearFilters").addEventListener("click", () => {
-  printRestaurants()
-})
-
-//Fetching data from ZAMATO API and creating local copy of only used inforamtions for every restaurant
+//Fetching data from ZAMATO API and creating local copy of used only inforamtions for every restaurant
 fetch(url, { headers: { "user-key": apiKey } })
   .then(res => res.json())
   .then(json => {
@@ -51,8 +22,36 @@ fetch(url, { headers: { "user-key": apiKey } })
         image: el.restaurant.featured_image,
         address: el.restaurant.location.address,
         delivery: el.restaurant.has_online_delivery,
-        booking: el.restaurant.has_table_booking 
+        booking: el.restaurant.has_table_booking
       })
+    })
+    // Adding event listeners to buttons
+    document.getElementById("priceUp").addEventListener("click", () => {
+      sortUp("cost")
+    })
+    document.getElementById("priceDown").addEventListener("click", () => {
+      sortDown("cost")
+    })
+    document.getElementById("nameUp").addEventListener("click", () => {
+      sortUp("name")
+    })
+    document.getElementById("nameDown").addEventListener("click", () => {
+      sortDown("name")
+    })
+    document.getElementById("rateUp").addEventListener("click", () => {
+      sortUp("rating")
+    })
+    document.getElementById("rateDown").addEventListener("click", () => {
+      sortDown("rating")
+    })
+    document.getElementById("delivery").addEventListener("click", () => {
+      filterOptions("delivery")
+    })
+    document.getElementById("bookOnline").addEventListener("click", () => {
+      filterOptions("booking")
+    })
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      printRestaurants()
     })
     printRestaurants()
   })
@@ -60,7 +59,7 @@ fetch(url, { headers: { "user-key": apiKey } })
 
 //Universal filter function for boolean values (0/1 options)
 const filterOptions = (option) => {
-  printRestaurants( restaurants.filter( el => {
+  printRestaurants(restaurants.filter(el => {
     return el[option] === 1
   }))
 }
@@ -78,7 +77,7 @@ const sortDown = (key) => {
 }
 
 //Universal rendering function with default parameter asign to local restaurants array
-const printRestaurants = ( arr = restaurants ) => {
+const printRestaurants = (arr = restaurants) => {
   container.innerHTML = ""
   arr.forEach(el => {
     container.innerHTML += `
