@@ -34,6 +34,9 @@ document.getElementById("delivery").addEventListener("click", () => {
 document.getElementById("bookOnline").addEventListener("click", () => {
   filterOptions("booking")
 })
+document.getElementById("clearFilters").addEventListener("click", () => {
+  printRestaurants()
+})
 
 //Fetching data from ZAMATO API and creating local copy of only used inforamtions for every restaurant
 fetch(url, { headers: { "user-key": apiKey } })
@@ -78,6 +81,13 @@ const sortDown = (key) => {
 const printRestaurants = ( arr = restaurants ) => {
   container.innerHTML = ""
   arr.forEach(el => {
-    container.innerHTML += `<div class="boxes"><h2>${el.name}</h2><p>${el.cost}</p><p>${el.rating}</p><img src="${el.image}"><p>${el.address}</p></div>`
+    container.innerHTML += `
+      <div class="boxes">
+        <h2>${el.name}</h2>
+        <p>${el.cost}</p>
+        <p>${el.rating}</p>
+        <img src="${el.image}">
+        <p>${el.address}</p>
+      </div>`
   })
 }
